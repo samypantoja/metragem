@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Área e Quantidade de Mantas</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url(assets/leite.jpg);
+            background-repeat: repeat; 
+            background-size: 300px 300px; 
+            background-color: #f4f4f9; 
+        }
+
+        .container {
+            background: linear-gradient(135deg, #89f7fe, #66a6ff);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: white;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+        }
+
+        .btn {
+            background-color: #66a6ff;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #89f7fe;
+        }
+
+        .resultado {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 20px;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Mantas</h1>
+        <label for="largura">Largura (m):</label>
+        <input type="number" id="largura" placeholder="Digite a largura" min="0" step="0.01">
+
+        <label for="comprimento">Comprimento (m):</label>
+        <input type="number" id="comprimento" placeholder="Digite o comprimento" min="0" step="0.01">
+
+        <label for="metragemManta">Metragem da Manta (m²):</label>
+        <input type="number" id="metragemManta" placeholder="Digite a metragem da manta" min="0" step="0.01">
+
+        <button class="btn" onclick="calcular()">Calcular</button>
+
+        <div class="resultado" id="resultado"></div>
+    </div>
+
+    <script>
+        function calcular() {
+            const largura = parseFloat(document.getElementById('largura').value);
+            const comprimento = parseFloat(document.getElementById('comprimento').value);
+            const metragemManta = parseFloat(document.getElementById('metragemManta').value);
+
+            if (isNaN(largura) || isNaN(comprimento) || isNaN(metragemManta) || largura <= 0 || comprimento <= 0 || metragemManta <= 0) {
+                document.getElementById('resultado').innerHTML = "Por favor, insira valores válidos.";
+                return;
+            }
+
+            // Cálculo da área
+            const area = largura * comprimento;
+            
+            // Cálculo da quantidade de mantas
+            const quantidadeMantas = Math.ceil(area / metragemManta);
+
+            document.getElementById('resultado').innerHTML = `Área: ${area.toFixed(2)} m²<br>Quantidade de mantas: ${quantidadeMantas}`;
+        }
+    </script>
+</body>
+</html>
